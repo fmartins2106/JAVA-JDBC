@@ -23,18 +23,6 @@ public class ProducerRepository {
             e.printStackTrace();
         }
 
-        public static void delete(int id){
-            String sql = "Delete into anime_store.producer(name) values ('%d');".formatted(id);
-            try(Connection connection = ConnectionFactory.getConnection();
-                Statement stmt = connection.createStatement()){
-                int rowsAffected = stmt.executeUpdate(sql);
-                log.info("Delete producer '{}' from the database,rows affected '{}'",id,rowsAffected);
-            }catch (SQLException e){
-                log.error("error while trying to delete producer '{}'",id,e);
-                e.printStackTrace();
-            }
-        }
-
     }
 
     public static void delete(int id){
