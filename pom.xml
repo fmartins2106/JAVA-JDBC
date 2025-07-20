@@ -2,6 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.example</groupId>
+<<<<<<< HEAD
   <artifactId>JAVAJDBC</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
@@ -16,6 +17,14 @@
     </dependency>
 
     <!-- Dependência para testes -->
+=======
+  <artifactId>Java-JDBC</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>Java-JDBC Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+>>>>>>> cb65e69 (Lombok,Logs)
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -23,8 +32,13 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+<<<<<<< HEAD
 
   <build>
     <finalName>JAVAJDBC</finalName>
+=======
+  <build>
+    <finalName>Java-JDBC</finalName>
+>>>>>>> cb65e69 (Lombok,Logs)
   </build>
 </project>
