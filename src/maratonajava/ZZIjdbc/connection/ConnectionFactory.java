@@ -1,0 +1,28 @@
+package maratonajava.ZZIjdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnectionFactory {
+    public static Connection getConnection() {
+        String url = "jdbc:postgresql://localhost:5433/minha_base";
+        String username = "fmartins";
+        String password = "masterkey";
+        try {
+            // Carrega o driver explicitamente (pode ajudar com o erro "No suitable driver")
+            Class.forName("org.postgresql.Driver");
+
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Conexão aberta com sucesso!");
+            return connection;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Driver PostgreSQL não encontrado", e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao conectar ao banco", e);
+        }
+    }
+}
