@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: masterkey # sua senha do banco
       POSTGRES_DB: minha_base # nome do banco padrão criado
     ports:
-        - "5433:5432" # mapeando a porta 5433 do host para 5432 do container
+      - "5433:5432" # mapeando a porta 5433 do host para 5432 do container
     volumes:
       - pgdata:/var/lib/postgresql/data
 volumes:
