@@ -16,7 +16,7 @@ public class ConnectionFactoryTest {
         Producer producer = Producer.builder().name("Studio Deen").build();
 //        ProducerService.save(producer);
 
-        ProducerService.delete();
+        ProducerService.delete(13);
 //        try (Connection connection = ConnectionFactory.getConnection()) {
 //            if (connection != null && !connection.isClosed()) {
 //                System.out.println("Testando a conexão: OK!");
