@@ -1,20 +1,22 @@
-package JDCB;
+package JDCB.test;
 // ou o pacote correspondente
 
 import JDCB.dominio.Producer;
-import JDCB.repository.ProducerRepository;
+import JDCB.service.ProducerService;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class ConnectionFactoryTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
 //        log.info("info");
 //        log.warn("warn");
 //        log.debug("debug");
 //        log.error("error");
 //        log.trace("trace");
         Producer producer = Producer.builder().name("Studio Deen").build();
-        ProducerRepository.save(producer);
+//        ProducerService.save(producer);
+
+        ProducerService.delete();
 //        try (Connection connection = ConnectionFactory.getConnection()) {
 //            if (connection != null && !connection.isClosed()) {
 //                System.out.println("Testando a conexão: OK!");

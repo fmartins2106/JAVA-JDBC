@@ -1,4 +1,4 @@
-package JDCB;
+package JDCB.conn;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
