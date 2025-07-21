@@ -1,0 +1,13 @@
+package JDCB.service;
+
+import JDCB.dominio.Producer;
+import JDCB.repository.ProducerRepositoryRowSet;
+
+import java.util.List;
+
+public class ProducerServiceRowSet {
+
+    public static List<Producer> findByNameJdbcRowSet(String name){
+        return ProducerRepositoryRowSet.findByNameJdbcRowSet(name);
+    }
+}
