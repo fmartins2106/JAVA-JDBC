@@ -1,8 +1,11 @@
 package JDCB.test;
 // ou o pacote correspondente
 
+import JDCB.dominio.Producer;
 import JDCB.service.ProducerService;
 import lombok.extern.log4j.Log4j2;
+
+import java.util.List;
 
 @Log4j2
 public class ConnectionFactoryTest {
@@ -28,10 +31,29 @@ public class ConnectionFactoryTest {
 //        log.info("Producers found: '{}'",producers);
 //
 //        List<Producer> producers = ProducerService.findByName("MADHOUSE");
-//        log.info("Producers found: '{}'",producers);
+//        log.info("Producers found: '{}'",producers);c
 
 //        ProducerService.showProduceMetaData();
-        ProducerService.showDriveMetaData();
+//        ProducerService.showDriveMetaData();
+//
+//        List<Producer> producers = ProducerService.findByNameUpdateToUpper("Old");
+//        log.info("Producers found: '{}'",producers);
+////
+//        List<Producer> producers = ProducerService.findByNameAndInsertWhenNotFound("A-1 pictures");
+//        log.info("Producers found: '{}'",producers);
+
+//        ProducerService.findByNameAndDelete("A-1 pictures");
+//
+//          List<Producer> producers = ProducerService.findByNamePrepareStatiment("Bo");
+//          log.info("Producers found: '{}'",producers);
+
+//        Producer producerToUpdate = Producer.builder().id(1).name("med hause").build();
+//        ProducerService.updatePreparedStatement(producerToUpdate);
+
+        List<Producer> producers = ProducerService.findByNameCallableStatement("Bo");
+        log.info("Producers found: '{}'", producers);
+
+
 //        try (Connection connection = ConnectionFactory.getConnection()) {
 //            if (connection != null && !connection.isClosed()) {
 //                System.out.println("Testando a conexão: OK!");

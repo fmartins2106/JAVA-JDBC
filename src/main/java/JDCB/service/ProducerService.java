@@ -43,4 +43,33 @@ public class ProducerService {
             throw new IllegalArgumentException("Invalid value for id.");
         }
     }
+
+    public static List<Producer> findByNameUpdateToUpper(String name){
+        return ProducerRepository.findByNameUpdateToUpper(name);
+    }
+
+    public static List<Producer> findByNameAndInsertWhenNotFound(String name){
+        return ProducerRepository.findByNameAndInsertWhenNotFound(name);
+    }
+
+    public static void findByNameAndDelete(String name){
+        ProducerRepository.findByNameAndDelete(name);
+    }
+
+    public static List<Producer> findByNamePrepareStatiment(String name){
+        return ProducerRepository.findByNamePrepareStatiment(name);
+    }
+
+    public static void updatePreparedStatement(Producer producer){
+        validacaoID(producer.getId());
+        ProducerRepository.updatePreparedStatement(producer);
+    }
+
+    public static List<Producer> findByNameCallableStatement(String name){
+        return ProducerRepository.findByNameCallableStatement(name);
+    }
+
+
+
+
 }
