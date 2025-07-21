@@ -3,16 +3,44 @@ package JDCB.service;
 import JDCB.dominio.Producer;
 import JDCB.repository.ProducerRepository;
 
+import java.util.List;
+
 public class ProducerService {
 
-    public static void save(Producer producer){
+    public static void save(Producer producer) {
         ProducerRepository.save(producer);
     }
 
-    public static void delete(int id) throws IllegalAccessException {
-        if (id <= 0){
-            throw new IllegalAccessException("Invalid value for id");
-        }
+    public static void delete(Integer id) {
+        validacaoID(id);
         ProducerRepository.delete(id);
+    }
+
+    public static void update(Producer producer){
+        validacaoID(producer.getId());
+        ProducerRepository.update(producer);
+    }
+
+    public static List<Producer> findAll(){
+        return ProducerRepository.findAll();
+    }
+
+    public static List<Producer> findByName(String name){
+        return ProducerRepository.findByName(name);
+    }
+
+    public static void showProduceMetaData(){
+        ProducerRepository.showProduceMetaData();
+    }
+
+    public static void showDriveMetaData(){
+        ProducerRepository.showDriveMetaData();
+    }
+
+
+    private static void validacaoID(Integer id){
+        if (id == null || id <= 0){
+            throw new IllegalArgumentException("Invalid value for id.");
+        }
     }
 }
