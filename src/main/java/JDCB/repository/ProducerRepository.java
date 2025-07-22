@@ -261,7 +261,7 @@ public class ProducerRepository {
     }
 
     private static PreparedStatement preparedStatementUpdated(Connection connection, Producer producer) throws SQLException{
-        String sql = "UPDATE anime_store.producer SET name = ? WHERE(id = ?)";
+        String sql = "UPDATE anie_store.producer SET name = ? WHERE(id = ?)";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1,producer.getName());
         ps.setInt(2, producer.getId());
@@ -296,6 +296,39 @@ public class ProducerRepository {
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, String.format("%%%s%%", name));
         return ps;
+    }
+
+    public static void saveTransaction(List<Producer> producers){
+        try(Connection connection = ConnectionFactory.getConnection()){
+            connection.setAutoCommit(false);
+            preparedStatementSaveTransaction(connection,producers);
+            connection.commit();
+            connection.setAutoCommit(true);
+        }catch (SQLException e){
+            log.error("error while trying to update producer '{}'",producers,e);
+            e.printStackTrace();
+        }
+    }
+
+    private static void preparedStatementSaveTransaction(Connection connection, List<Producer> producers) throws SQLException{
+        String sql = "insert into anime_store.producer(name) values (?);";
+        boolean shouldRollBack = false;
+        for (Producer p: producers){
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+                log.info("Saving producer '{}'",p.getName());
+                ps.setString(1,p.getName());
+                ps.execute();
+            }catch (SQLException e){
+                e.printStackTrace();
+                shouldRollBack = true;
+            }
+        }
+        if (shouldRollBack) {
+            log.warn("Transaction is going to be rollback");
+            connection.rollback();
+        } else {
+            connection.rollback();
+        }
     }
 
 
