@@ -14,13 +14,13 @@ import java.util.List;
 @Log4j2
 public class ProducerRepository {
 
-    public static List<Producer> findByNamePrepareStatiment(String name){
+    public static List<Producer> findByNamePrepareStatiment(String name) {
         log.info("Finding producer by name '{}'", name);
         String sql = "SELECT * FROM anime_store.producer WHERE name LIKE ?";
         List<Producer> producers = new ArrayList<>();
-        try(Connection connection = ConnectionFactory.getConnection();
-            PreparedStatement ps = createdPreparedStatement(connection,sql,name);
-            ResultSet rs = ps.executeQuery()) {
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement ps = createdPreparedStatement(connection, sql, name);
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Producer producer = Producer.builder()
                         .id(rs.getInt("id"))
@@ -28,17 +28,36 @@ public class ProducerRepository {
                         .build();
                 producers.add(producer);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             log.error("Error while trying to find producers by name", e);
             e.printStackTrace();
         }
         return producers;
     }
 
-    private static PreparedStatement createdPreparedStatement(Connection connection, String sql, String name) throws SQLException{
+    private static PreparedStatement createdPreparedStatement(Connection connection, String sql, String name) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1,String.format("%%%s%%",name));
+        ps.setString(1, String.format("%%%s%%", name));
         return ps;
     }
+
+    public static void delete(int id) {
+        String sql = "delete from anime_store.producer where id = ?;";
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement ps = createdPreparedStatementDelete(connection, sql, id)) {
+            ps.execute();
+            log.info("Deleted producer '{}' from the database", id);
+        } catch (SQLException e) {
+            log.error("error while trying to delete producer '{}'", id, e);
+            e.printStackTrace();
+        }
+    }
+
+    private static PreparedStatement createdPreparedStatementDelete(Connection connection, String sql, int id) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
+        return ps;
+    }
+
 
 }

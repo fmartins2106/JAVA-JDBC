@@ -12,13 +12,14 @@ public class CrudTest01 {
             producerMenu();
             op = Integer.parseInt(SCANNER.nextLine().trim());
             if (op == 0) break;
-            ProducerService.buildMenu(op);
+            ProducerService.menu(op);
         }
     }
 
     private static void producerMenu(){
         System.out.println("Type the number of yout operation");
         System.out.println("1. Search for producer.");
+        System.out.println("2. Delete producer.");
         System.out.println("0. Exit.");
     }
 
