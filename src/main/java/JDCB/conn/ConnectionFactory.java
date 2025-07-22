@@ -1,5 +1,6 @@
 package JDCB.conn;
 
+import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.JdbcRowSet;
 import javax.sql.rowset.RowSetProvider;
 import java.sql.Connection;
@@ -36,8 +37,17 @@ public class ConnectionFactory {
         jdbcRowSet.setUsername(username);
         jdbcRowSet.setPassword(password);
         return jdbcRowSet;
+    }
 
-
+    public static CachedRowSet getCacheRowSet() throws SQLException{
+        String url = "jdbc:postgresql://localhost:5433/minha_base";
+        String username = "fmartins";
+        String password = "masterkey";
+        CachedRowSet cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+        cachedRowSet.setUrl(url);
+        cachedRowSet.setUsername(username);
+        cachedRowSet.setPassword(password);
+        return cachedRowSet;
     }
 
 

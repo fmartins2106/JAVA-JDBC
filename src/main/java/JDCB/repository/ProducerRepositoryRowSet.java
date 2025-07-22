@@ -4,7 +4,9 @@ import JDCB.conn.ConnectionFactory;
 import JDCB.dominio.Producer;
 import JDCB.listener.CustomRowSetListener;
 
+import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.JdbcRowSet;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -62,4 +64,31 @@ public class ProducerRepositoryRowSet {
             e.printStackTrace();
         }
     }
+
+    public static void updateCacheRowSet(Producer producer){
+        String sql = "SELECT * FROM anime_store.producer WHERE(id = ?)";
+        try (CachedRowSet crs = ConnectionFactory.getCacheRowSet();
+        Connection connection = ConnectionFactory.getConnection()){
+            connection.setAutoCommit(false);
+
+            crs.setType(ResultSet.TYPE_SCROLL_INSENSITIVE);
+            crs.setConcurrency(ResultSet.CONCUR_UPDATABLE);
+            crs.setCommand(sql);
+            crs.setInt(1,producer.getId());
+            crs.addRowSetListener(new CustomRowSetListener());
+
+            crs.execute(connection);
+
+            if (!crs.next()) return;
+
+            crs.updateString("name",producer.getName());
+            crs.updateRow(); // <--- ESSENCIAL: aplica a alteração no banco
+
+            crs.acceptChanges(connection);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
 }
