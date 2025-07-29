@@ -27,7 +27,7 @@ public class AnimeService {
         List<Anime> animes = AnimeRepository.findByNamePrepareStatiment(name);
         animes.forEach(anime-> System.out.printf("[%d] -%s\n", anime.getId(), anime.getName()));
     }
-
+z
     private static void delete() {
         findByName();
         System.out.println("Type the ID of the anime you want to delete:");

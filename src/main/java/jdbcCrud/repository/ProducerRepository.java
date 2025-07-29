@@ -83,7 +83,8 @@ public class ProducerRepository {
              PreparedStatement ps = createdPreparedStatementFindById(connection, sql, id);
              ResultSet rs = ps.executeQuery()) {
             if (!rs.next()) return Optional.empty();
-            return Optional.of(Producer                    .builder()
+            return Optional.of(Producer
+                    .builder()
                     .id(rs.getInt("id"))
                     .name(rs.getString("name"))
                     .build());
@@ -121,5 +122,4 @@ public class ProducerRepository {
         ps.setInt(2, producer.getId());
         return ps;
     }
-
 }
